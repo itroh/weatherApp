@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/b554de3aa0.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>The weather app</h1>
+        </div>
+        <!-- ligne search-->
+        <div class="row">
+            <div class="offset-lg-6">
+                <form class="form-inline" method="POST" action="/add-city">
+                    <div class="form-group" id="searchMeteo">
+                        <label for="city" class="mr-sm-2">Ville</label>
+                        <input type="text" class="form-control mr-sm-2" placeholder="Paris, Lyon ..." name="city">
+                        <button type="submit" class="btn btn-warning my-2 my-sm-0">Enregistrer</button>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- ligne map + tableau-->
+        <!--    map-->
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                <figure>
+                    <img src="images/map.png" class="figure-img img-fluid rounded">
+
+                </figure>
+            </div>
+            <!-- tableau-->
+            <div class="col-12 col-lg-6">
+                <div class="container rounded">
+                    <!--une ligne par ville -->
+                    <%for(var i=0;i<cityList.length;i++){%>
+                        <div class="row city border">
+                            <div class="col-3">
+                                <%=cityList[i].name%>
+                            </div>
+                            <div class="col-7">
+                                <img src=<%=cityList[i].picto%> id="picto">
+                                <span><%=cityList[i].descr%></span>
+                                <span class="badge badge-warning"><%=cityList[i].tempMin%>°</span>
+                                <span class="badge badge-secondary"><%=cityList[i].tempMax%>°</span>
+                            </div>
+                            <div class="col-2">
+                                <form action="/delete-city" method="POST">
+                                    <input type="hidden" name="city" value=<%=cityList[i].name%>>
+                                    <button type="submit" class="close " aria-label="Close">
+                                    <i class="far fa-times-circle"></i></button>
+                                </form>
+
+                            </div>
+                        </div>
+
+
+                        <% }%>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

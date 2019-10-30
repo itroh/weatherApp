@@ -1,0 +1,16 @@
+#searchMeteo {
+    margin: 10px;
+}
+
+.city {
+    padding: 10px;
+    align-items: center;
+}
+
+.fa-times-circle {
+    color: #ffc107;
+}
+
+#picto {
+    height: 50px;
+}
